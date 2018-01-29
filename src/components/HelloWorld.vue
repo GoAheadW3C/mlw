@@ -1,40 +1,18 @@
 <template>
   <div class="home">
-      <div class="second-floor">
-        <div class="second-floor-content">
+        <div class="bottom-content" style="width: 100%;height:400%;background: blue;">
+          <div class="top-content" style="width: 100%;height: 100%;background: yellow;"></div>
           <ul>
-            <li>a</li>
-            <li>b</li>
-            <li>c</li>
-            <li>d</li>
-            <li>e</li>
-            <li>f</li>
-            <li>g</li>
-            <li>h</li>
-          </ul>
-        </div>
-      </div>
-      <div class="first-floor">
-        <div class="first-floor-content">
-          <ul>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-            <li>5</li>
-            <li>6</li>
-            <li>7</li>
             <li>8</li>
-            <li>9</li>
-            <li>10</li><li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-            <li>5</li>
-            <li>6</li>
+            <li>8</li>
+            <li>8</li>
+            <li>8</li>
+            <li>8</li>
+            <li>8</li>
+            <li>8</li>
+            <li>8</li>
           </ul>
         </div>
-      </div>
   </div>
 </template>
 
@@ -44,15 +22,25 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      home_scroll: null,
       content_height:window.document.body.clientHeight
     }
   },
   mounted(){
-      this.home_scroll = new BScroll('.home',{
-      startY:-this.content_height*5/5,
-      probeType:3
-    });
+      this.content = new BScroll('.home',{
+        scrollX:false,
+        probeType:3
+      });
+
+      this.content.on('scroll',(pos) => {
+        if(pos.y/this.content_height >= 0.2){
+          //更改显示的内容
+
+          //滚动到制定位置
+          this.content.scrollTo(0,this.content_height,1000);
+        }else{
+
+        }
+      })
 
   }
 }
@@ -79,21 +67,20 @@ a {
   height: 100%;
   background: red;
   overflow: hidden;
+  position: relative;
 }
-.content-wrap{
+.content{
   width: 100%;
-  height: 200%;
+  height: 100%;
 }
-.first-floor{
-  width: 100%;
-  height: 50%;
-  background:blue;
-  overflow: hidden;
+.top-content{
+  position: absolute;
+  left: 0;
+  top: -100%;
 }
-.second-floor{
-  width: 100%;
-  height: 50%;
-  background: green;
-  overflow: hidden;
+.bottom-content{
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 </style>
